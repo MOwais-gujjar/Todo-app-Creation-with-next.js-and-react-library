@@ -1,17 +1,16 @@
 "use client";
 import React, { use, useState } from "react";
-
 export default function Todolist() {
+  //Hooks
   const [todo, setTodo] = useState("");
+  // Todo Array
   const [todos, todoSet] = useState([
     { todoText: "Zia Khan", completed: false },
     { todoText: "Daniyal", completed: false },
     { todoText: "Owais", completed: true },
   ]);
+  // create new todo
   const onClickHandler = (oTodo: any) => {
-    // create new todo
-    console.log("Todo: ", oTodo);
-
     const newTodo = todos.map((nTodo) => {
       if (nTodo.todoText == oTodo.todoText) {
         nTodo.completed = !nTodo.completed;
@@ -20,11 +19,13 @@ export default function Todolist() {
     });
     todoSet(newTodo);
   };
+  //Add Data Function
   const newTodoItem = () => {
     const newItem = { todoText: todo, completed: false };
     const newItems = [...todos, newItem];
     todoSet(newItems);
   };
+  //Delete Function
   const deleteTodo = (n: any) => {
     const newItems = todos.filter((todo) => {
       if (todo.todoText == n.todoText) {
@@ -34,10 +35,10 @@ export default function Todolist() {
     });
     todoSet(newItems);
   };
-
   return (
     <>
       <h1>Wellcome to todo List Web Application </h1>
+      {/* Input Data */}
       <input
         placeholder="add todo item"
         value={todo}
@@ -54,7 +55,9 @@ export default function Todolist() {
           boxShadow: "inset",
         }}
       />
+      {/* add Data Button */}
       <button onClick={newTodoItem}>Add Item </button>
+        {/* todo List */}
       <ul>
         {todos.map((elm) => {
           return (
@@ -73,6 +76,7 @@ export default function Todolist() {
                 }}
               />
               {elm.todoText}
+              {/* Delete button */}
               <button
                 onClick={() => {
                   deleteTodo(elm);
